@@ -7,3 +7,13 @@ def insertionSort(anArray):
             anArray[x + 1] = anArray[x]
             x = x - 1
         anArray[x + 1] = ins
+        
+        
+key = "IBSN"
+
+def bubbleSort(anArray):
+  for i in range(len(anArray)):
+    for j in range(i+1, len(anArray)):
+        if anArray[i][key] > anArray[j][key]:
+            anArray[i], anArray[j] = anArray[j], anArray[i]
+

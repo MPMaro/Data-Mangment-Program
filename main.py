@@ -19,14 +19,19 @@ books = [
     "Title" : "The 20th Victom",
     "Author": "Jaimes Aderson",
     "IBSN" : 457845,
-    "Genre" : "Myster"
+    "Genre" : "Mystery"
   } ,
   {
-    "Title" : "The Outsider",
-    "Author": "JackSp",
-    "IBSN" : 909009,
-    "Genre" : "Fairytale"
+    "Title" : "The Hunger Games",
+    "Author": "Katniess Everdeen",
+    "IBSN" : 795754,
+    "Genre" : "Horror"
   } ,
+  
+]
+
+
+favorite_list = [
   
 ]
 
@@ -60,34 +65,41 @@ while ProgramLoop:
 
     #Option 2 - Display Some of the data
     elif(userInput == "2"):
-        userin = input("Type out the Genre: ")
-        for x in range(len(books)):
-            if userin == books[x]["Genre"]:
-                print(books[x]["Title"])
+      userin = input("Type out the Genre: ")
+      for x in range(len(books)):
+        if userin == books[x]["Genre"]:
+            print(books[x]["Title"])
                  
 
     #Option 3 - Sort the Data
     elif(userInput == "3"):
-        sorted_data = []
-        for x in range(len(books)):
-            sorted_data.append(books[x]["IBSN"])
-        helpers.insertionSort(sorted_data)
-        print(sorted_data)
-        
-    #Option 4 - New Contact
+      helpers.bubbleSort(books)
+      for x in range(len(books)):
+        print((books[x]["IBSN"]))
+                
+    #Option 4 - Add to a Favorite List
     elif(userInput == "4"):
-        print("PlaceHolder")
-
-
+      list = []
+      userin = input("What book to add") 
+      for x in range(len(books)):
+        if userin == books[x]["Title"]:
+          favorite_list.append(books[x])
+      print(favorite_list)  
+          
     #Option 5 - Remove Contact
     elif(userInput == "5"):
         print("PlaceHolder")
-
+        
+        
+    elif(userInput == "6"):
+        print("placeholder")
 
     #Option 6 - End Loop
-    elif(userInput == "6"):
+    elif(userInput == "7"):
         break
     
+    
+  
     
     
     
