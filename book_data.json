@@ -1,0 +1,27 @@
+[
+    {
+      "Title" : "The Outsider",
+      "Author": "JackSp",
+      "IBSN" : 909009,
+      "Genre" : "Thiller"
+    } ,
+    {
+      "Title" : "Harry Potter",
+      "Author": "Harry",
+      "IBSN" : 23562136,
+      "Genre" : "FairyTale"
+    } ,
+    {
+      "Title" : "The 20th Victom",
+      "Author": "Jaimes Aderson",
+      "IBSN" : 457845,
+      "Genre" : "Mystery"
+    } ,
+    {
+      "Title" : "The Hunger Games",
+      "Author": "Katniess Everdeen",
+      "IBSN" : 795754,
+      "Genre" : "Horror"
+    } 
+]
+  

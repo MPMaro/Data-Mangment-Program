@@ -1,38 +1,21 @@
 
 import re
 import helpers
+import json
 
 #Inizialize the list
-books = [
-  {
-    "Title" : "The Outsider",
-    "Author": "JackSp",
-    "IBSN" : 909009,
-    "Genre" : "Thiller"
-  } ,
-  {
-    "Title" : "Harry Potter",
-    "Author": "Harry",
-    "IBSN" : 23562136,
-    "Genre" : "FairyTale"
-  } ,
-  {
-    "Title" : "The 20th Victom",
-    "Author": "Jaimes Aderson",
-    "IBSN" : 457845,
-    "Genre" : "Mystery"
-  } ,
-  {
-    "Title" : "The Hunger Games",
-    "Author": "Katniess Everdeen",
-    "IBSN" : 795754,
-    "Genre" : "Horror"
-  } ,
-]
 
-favorite_list = [
-  
-]
+#Load book data from JSON file
+file = open("book_data.json", "r")
+dataStr = file.read()
+file.close()
+books = json.loads(dataStr)
+
+#Load Favourites from JSON file
+file2 = open("fav.json", "r")
+dataStr2 = file2.read()
+file2.close()
+favorite_list = json.loads(dataStr2)
 
 
 def opt1():
@@ -43,9 +26,10 @@ def opt1():
             print(books[x]["Genre"])
             print(" ") 
 def opt2():
-      userin = input("Type out the Genre: ")
+      userin = input("Type out the Genre: ").capitalize()
       for x in range(len(books)):
         if userin == books[x]["Genre"]:
+            print(" ")
             print(books[x]["Title"])  
             print(books[x]["Author"])  
             print(books[x]["IBSN"])  
@@ -56,12 +40,14 @@ def opt2():
       return
     
 def opt3():
-      helpers.bubbleSort(books)
-      for x in range(len(books)):
-        print((books[x]["IBSN"]))
+      userin = input("Type in the Data To Sort: ").capitalize()
+      if userin == "Title" or "Genre" or  "IBSN" or "Author":
+          helpers.bubbleSort(books,userin)
+          print("Data Sorted")
+        
 
 def opt4():
-      userin = input("What book to add: ") 
+      userin = input("What book to add: ")
       for x in range(len(books)):
         if userin == books[x]["Title"]:
           favorite_list.append(books[x])
@@ -132,7 +118,10 @@ while ProgramLoop:
       opt6()
     #Option 7 - End Loop
     elif(userInput == "7"):
-        break
+      json_str = json.dumps(favorite_list)
+      with open("fav.json", "w") as f:
+            f.write(json_str)  
+      break
     
     
   
