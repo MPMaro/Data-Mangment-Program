@@ -40,7 +40,7 @@ def opt2():
       return
     
 def opt3():
-      userin = input("Type in the Data To Sort: ").capitalize()
+      userin = input("Type in the Data To Sort: ")
       if userin == "Title" or "Genre" or  "IBSN" or "Author":
           helpers.bubbleSort(books,userin)
           print("Data Sorted")
@@ -68,12 +68,15 @@ def opt5():
       
       
 def opt6():
+        favlist_length = len(favorite_list)
         for x in range(len(favorite_list)):
             print(favorite_list[x]["Title"])
             print(favorite_list[x]["Author"])
             print(favorite_list[x]["IBSN"])
             print(favorite_list[x]["Genre"])
             print(" ")
+        if favlist_length == 0:
+            print("No Books in Favorite LIst")
   
 #Set Loop True
 ProgramLoop = True

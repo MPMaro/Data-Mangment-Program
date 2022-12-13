@@ -3,13 +3,13 @@
       "Title" : "The Outsider",
       "Author": "JackSp",
       "IBSN" : 909009,
-      "Genre" : "Thiller"
+      "Genre" : "Thriller"
     } ,
     {
       "Title" : "Harry Potter",
       "Author": "Harry",
       "IBSN" : 23562136,
-      "Genre" : "FairyTale"
+      "Genre" : "Fiction"
     } ,
     {
       "Title" : "The 20th Victom",
@@ -22,6 +22,43 @@
       "Author": "Katniess Everdeen",
       "IBSN" : 795754,
       "Genre" : "Horror"
+    } ,
+    {
+      "Title" : "Curious George",
+      "Author": "Natsuya Mitsuyoshi",
+      "IBSN" : 93373727,
+      "Genre" : "Fiction"
+    } ,
+    {
+      "Title" : "Da Vinci Code",
+      "Author": "Dan Brown",
+      "IBSN" : 1909,
+      "Genre" : "Horror"
+    } ,
+    {
+      "Title" : "To Kill A Mocking Bird",
+      "Author": "Harper Lee",
+      "IBSN" : 23423423,
+      "Genre" : "Fiction"
+    } ,
+    {
+      "Title" : "It Ends With Us",
+      "Author": "Colleen Hoover",
+      "IBSN" : 795754,
+      "Genre" : "Thriller"
+    } ,
+    {
+      "Title" : "The Alchemist",
+      "Author": "Paulo Coelho",
+      "IBSN" : 1347856,
+      "Genre" : "History"
+    } ,
+    {
+      "Title" : "War and Peace",
+      "Author": "Leo Tolstoy",
+      "IBSN" : 4589649,
+      "Genre" : "History"
     } 
+    
 ]
   
