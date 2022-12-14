@@ -17,6 +17,12 @@ dataStr2 = file2.read()
 file2.close()
 favorite_list = json.loads(dataStr2)
 
+#Load User Information From JSON file
+file3 = open("userinformation.json", "r")
+dataStr3 = file3.read()
+file3.close()
+userinfo = json.loads(dataStr3)
+
 
 def opt1():
         for x in range(len(books)):
@@ -78,8 +84,70 @@ def opt6():
         if favlist_length == 0:
             print("No Books in Favorite LIst")
   
+  
+userlogin = True
+
 #Set Loop True
-ProgramLoop = True
+ProgramLoop = False
+while userlogin:
+
+    #Print the Options
+    print("Enter 'L' to log in:")
+    print("Enter 'S' to sign up:")
+    print("Enter 'E' to exit:")
+
+    # Get the user's choice
+    choice = input("Please Enter Your choice:\n").lower()
+
+
+    #Log In
+    if choice == "l":
+      #Get the User Informationj
+      username = input("Enter your username:")
+      password = input("Enter your password:")
+
+      #Log the User In
+      if username in userinfo and userinfo[username] == password:
+        logged_in = True
+        print("Login successful!")
+        ProgramLoop = True
+        break
+
+      else:
+          #Incase UserInformation Not Found
+        print("Incorrect username or password.")
+
+
+    # Signup
+    elif choice == "s":
+      username = input("Create a username:")
+      password = input("Create a password:")
+
+      # If the username is not already in the users dictionary, add it
+      if username not in userinfo:
+        userinfo[username] = password
+        print("Sign up successful!")
+        ProgramLoop = True
+
+        #Upload To JSON
+        json_str = json.dumps(userinfo)
+        with open("userinformation.json", "w") as f:
+            f.write(json_str)
+
+        break
+      else:
+        # Display an error message
+        print("Username already exists")
+
+
+    #Exit the Loop
+    elif choice == "e":
+        break
+
+
+    #Invalid Input
+    else:
+        print("Please enter a valid input")
 
 #Start Looping
 while ProgramLoop:
