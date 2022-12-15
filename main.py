@@ -23,7 +23,77 @@ dataStr3 = file3.read()
 file3.close()
 userinfo = json.loads(dataStr3)
 
+# Global 
+userpos = -1
 
+
+
+  
+  
+#Loops
+userlogin = True
+ProgramLoop = False
+
+# User Login and Create Account
+
+while userlogin:
+
+    # Print the options
+    print("Enter '1' to log in:")
+    print("Enter '2' to sign up:")
+    print("Enter '3' to exit:")
+
+    # Get the user's choice
+    choice = input("Please Enter Your choice:\n").lower()
+
+    # Log In
+    if choice == "1":
+        # Get the user information
+        username = input("Enter your username:")
+        password = input("Enter your password:")
+
+        for i in range(len(userinfo)):
+            if userinfo[i]["username"] == username and userinfo[i]["password"] == password:
+                userpos = i
+                print("Login successful!")
+                ProgramLoop = True
+                userlogin = False
+                break
+            else:
+                print("Incorrect username or password.")
+
+    # Signup
+    elif choice == "2":
+        username = input("Create a username:")
+        password = input("Enter your password:")
+
+        # If the username is not already in the users dictionary, add it
+        for i in range(len(userinfo)):
+            if userinfo[i]["username"] == username:
+
+                print("Account  exists")
+                break
+        else:
+            userinfo.append({"username": username, "password": password, "favour":[]})
+            userpos = len(userinfo)
+            print("Sign up successful!")
+            ProgramLoop = True
+            userlogin = False
+
+    # Exit the loop
+    elif choice == "3":
+        # Set the userlogin variable to False to exit the loop
+        userlogin = False
+
+    # Invalid input
+    else:
+        print("Please enter a valid input")
+
+
+# Upload to JSON
+with open("userinformation.json", "w") as f:
+    json.dump(userinfo, f)
+ 
 def opt1():
         for x in range(len(books)):
             print(books[x]["Title"])
@@ -54,19 +124,21 @@ def opt3():
 
 def opt4():
       userin = input("What book to add: ")
+      print(userin)
       for x in range(len(books)):
         if userin == books[x]["Title"]:
-          favorite_list.append(books[x])
+          print(userin)
+          userinfo[userpos]["favour"].append(books[x]["Title"])
           print("Books Added")
           return
-      print("Book Not found")
-      return
+        print("Book Not found")
+        return
        
 def opt5():
         userin = input("What book to remove: ")
         for book in favorite_list:
           if userin == book["Title"]:
-            favorite_list.remove(book)
+            userinfo[userpos]["favour"].remove(book)
             print("Book Removed")
             return
         print("Book Not Found in Favourite List")
@@ -83,72 +155,7 @@ def opt6():
             print(" ")
         if favlist_length == 0:
             print("No Books in Favorite LIst")
-  
-  
-userlogin = True
-
-#Set Loop True
-ProgramLoop = False
-while userlogin:
-
-    #Print the Options
-    print("Enter 'L' to log in:")
-    print("Enter 'S' to sign up:")
-    print("Enter 'E' to exit:")
-
-    # Get the user's choice
-    choice = input("Please Enter Your choice:\n").lower()
-
-
-    #Log In
-    if choice == "l":
-      #Get the User Informationj
-      username = input("Enter your username:")
-      password = input("Enter your password:")
-
-      #Log the User In
-      if username in userinfo and userinfo[username] == password:
-        logged_in = True
-        print("Login successful!")
-        ProgramLoop = True
-        break
-
-      else:
-          #Incase UserInformation Not Found
-        print("Incorrect username or password.")
-
-
-    # Signup
-    elif choice == "s":
-      username = input("Create a username:")
-      password = input("Create a password:")
-
-      # If the username is not already in the users dictionary, add it
-      if username not in userinfo:
-        userinfo[username] = password
-        print("Sign up successful!")
-        ProgramLoop = True
-
-        #Upload To JSON
-        json_str = json.dumps(userinfo)
-        with open("userinformation.json", "w") as f:
-            f.write(json_str)
-
-        break
-      else:
-        # Display an error message
-        print("Username already exists")
-
-
-    #Exit the Loop
-    elif choice == "e":
-        break
-
-
-    #Invalid Input
-    else:
-        print("Please enter a valid input")
-
+    
 #Start Looping
 while ProgramLoop:
 
@@ -189,9 +196,9 @@ while ProgramLoop:
       opt6()
     #Option 7 - End Loop
     elif(userInput == "7"):
-      json_str = json.dumps(favorite_list)
-      with open("fav.json", "w") as f:
-            f.write(json_str)  
+# Upload to JSON
+      with open("userinformation.json", "w") as f:
+        json.dump(userinfo, f)  
       break
     
     
