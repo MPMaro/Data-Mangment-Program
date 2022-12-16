@@ -1,5 +1,4 @@
 
-import re
 import helpers
 import json
 
@@ -27,7 +26,7 @@ userinfo = json.loads(dataStr3)
 userpos = -1
 
 
-
+  
   
   
 #Loops
