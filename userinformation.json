@@ -1,1 +1,1 @@
-[{"username": "a", "password": "a", "favour": ["The Outsider", "The Outsider"]}, {"username": "b", "password": "b", "favour": ["The Outsider"]}]
+[{"username": "a", "password": "a", "favour": [{"Title": "The Outsider", "Author": "JackSp", "IBSN": 909009, "Genre": "Thriller"}, {"Title": "The Outsider", "Author": "JackSp", "IBSN": 909009, "Genre": "Thriller"}, {"Title": "The Outsider", "Author": "JackSp", "IBSN": 909009, "Genre": "Thriller"}]}]

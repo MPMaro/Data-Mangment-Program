@@ -10,11 +10,7 @@ dataStr = file.read()
 file.close()
 books = json.loads(dataStr)
 
-#Load Favourites from JSON file
-file2 = open("fav.json", "r")
-dataStr2 = file2.read()
-file2.close()
-favorite_list = json.loads(dataStr2)
+
 
 #Load User Information From JSON file
 file3 = open("userinformation.json", "r")
@@ -23,12 +19,9 @@ file3.close()
 userinfo = json.loads(dataStr3)
 
 # Global 
-userpos = -1
+user = -1
 
 
-  
-  
-  
 #Loops
 userlogin = True
 ProgramLoop = False
@@ -55,6 +48,7 @@ while userlogin:
             if userinfo[i]["username"] == username and userinfo[i]["password"] == password:
                 userpos = i
                 print("Login successful!")
+                user = username
                 ProgramLoop = True
                 userlogin = False
                 break
@@ -76,6 +70,7 @@ while userlogin:
             userinfo.append({"username": username, "password": password, "favour":[]})
             userpos = len(userinfo)
             print("Sign up successful!")
+            user = username
             ProgramLoop = True
             userlogin = False
 
@@ -92,7 +87,14 @@ while userlogin:
 # Upload to JSON
 with open("userinformation.json", "w") as f:
     json.dump(userinfo, f)
- 
+    
+userIndex = helpers.binary_search(userinfo, 'username', user )
+favorite_list = userinfo[userIndex]["favour"]
+
+def uploadtoJson():
+  with open("userinformation.json", "w") as f:
+    json.dump(userinfo, f)
+
 def opt1():
         for x in range(len(books)):
             print(books[x]["Title"])
@@ -110,34 +112,32 @@ def opt2():
             print(books[x]["IBSN"])  
             print(books[x]["Genre"])  
             print(" ")  
-            return
-      print("Not found")
-      return
+  
     
 def opt3():
       userin = input("Type in the Data To Sort: ")
-      if userin == "Title" or "Genre" or  "IBSN" or "Author":
+      if userin in ["Title", "IBSN", "Author", "Genre"]:
           helpers.bubbleSort(books,userin)
           print("Data Sorted")
         
 
 def opt4():
       userin = input("What book to add: ")
-      print(userin)
       for x in range(len(books)):
         if userin == books[x]["Title"]:
-          print(userin)
-          userinfo[userpos]["favour"].append(books[x]["Title"])
-          print("Books Added")
+          favorite_list.append(books[x])
+          uploadtoJson()
+          print(" Book Added ")
           return
         print("Book Not found")
         return
        
 def opt5():
         userin = input("What book to remove: ")
-        for book in favorite_list:
-          if userin == book["Title"]:
-            userinfo[userpos]["favour"].remove(book)
+        for x in range(len(books)):
+          if userin == books[x]["Title"]:
+            favorite_list.pop(x)
+            uploadtoJson()
             print("Book Removed")
             return
         print("Book Not Found in Favourite List")
@@ -154,6 +154,9 @@ def opt6():
             print(" ")
         if favlist_length == 0:
             print("No Books in Favorite LIst")
+
+
+
     
 #Start Looping
 while ProgramLoop:
@@ -196,12 +199,10 @@ while ProgramLoop:
     #Option 7 - End Loop
     elif(userInput == "7"):
 # Upload to JSON
-      with open("userinformation.json", "w") as f:
-        json.dump(userinfo, f)  
       break
     
     
   
-    
+
     
     

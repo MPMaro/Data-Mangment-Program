@@ -7,6 +7,11 @@ def bubbleSort(anArray, key):
         if anArray[i][key] > anArray[j][key]:
             anArray[i], anArray[j] = anArray[j], anArray[i]
 
+
+
+
+
+
 def binary_search(list, key, value):
   low = 0
   high = len(list) - 1
