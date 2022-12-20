@@ -20,80 +20,91 @@ userinfo = json.loads(dataStr3)
 
 # Global 
 user = -1
+favorite_list = -1
 
-
+def finduser():
+  userIndex = helpers.binary_search(userinfo, 'username', user )
+  favslist = userinfo[userIndex]["favour"]
+  return favslist
 #Loops
-userlogin = True
 ProgramLoop = False
 
 # User Login and Create Account
 
-while userlogin:
+def startloop():
+  global user
+  global favorite_list
+  global ProgramLoop
+  userlogin = True
+  
+  while userlogin:
 
-    # Print the options
-    print("Enter '1' to log in:")
-    print("Enter '2' to sign up:")
-    print("Enter '3' to exit:")
+      # Print the options
+      print("Enter '1' to log in:")
+      print("Enter '2' to sign up:")
+      print("Enter '3' to exit:")
 
-    # Get the user's choice
-    choice = input("Please Enter Your choice:\n").lower()
+      # Get the user's choice
+      choice = input("Please Enter Your choice:\n").lower()
 
-    # Log In
-    if choice == "1":
-        # Get the user information
-        username = input("Enter your username:")
-        password = input("Enter your password:")
+      # Log In
+      if choice == "1":
+          # Get the user information
+          username = input("Enter your username:")
+          password = input("Enter your password:")
 
-        for i in range(len(userinfo)):
-            if userinfo[i]["username"] == username and userinfo[i]["password"] == password:
-                userpos = i
-                print("Login successful!")
-                user = username
-                ProgramLoop = True
-                userlogin = False
-                break
-            else:
-                print("Incorrect username or password.")
+          for i in range(len(userinfo)):
+              if userinfo[i]["username"] == username and userinfo[i]["password"] == password:
+                  userpos = i
+                  print("Login successful!")
+                  user = username
+                  favorite_list = finduser()
+                  ProgramLoop = True
+                  userlogin = False
+                  break
+              else:
+                  print("Incorrect username or password.")
 
-    # Signup
-    elif choice == "2":
-        username = input("Create a username:")
-        password = input("Enter your password:")
+      # Signup
+      elif choice == "2":
+          username = input("Create a username:")
+          password = input("Enter your password:")
 
-        # If the username is not already in the users dictionary, add it
-        for i in range(len(userinfo)):
-            if userinfo[i]["username"] == username:
+          # If the username is not already in the users dictionary, add it
+          for i in range(len(userinfo)):
+              if userinfo[i]["username"] == username:
 
-                print("Account  exists")
-                break
-        else:
-            userinfo.append({"username": username, "password": password, "favour":[]})
-            userpos = len(userinfo)
-            print("Sign up successful!")
-            user = username
-            ProgramLoop = True
-            userlogin = False
+                  print("Account  exists")
+                  break
+          else:
+              userinfo.append({"username": username, "password": password, "favour":[]})
+              userpos = len(userinfo)
+              print("Sign up successful!")
+              user = username
+              favorite_list = finduser()
+              ProgramLoop = True
+              userInput = False
+              
+              
+      # Exit the loop
+      elif choice == "3":
+          # Set the userlogin variable to False to exit the loop
+          userlogin = False
 
-    # Exit the loop
-    elif choice == "3":
-        # Set the userlogin variable to False to exit the loop
-        userlogin = False
+      # Invalid input
+      else:
+          print("Please enter a valid input")
 
-    # Invalid input
-    else:
-        print("Please enter a valid input")
-
-
-# Upload to JSON
-with open("userinformation.json", "w") as f:
-    json.dump(userinfo, f)
-    
-userIndex = helpers.binary_search(userinfo, 'username', user )
-favorite_list = userinfo[userIndex]["favour"]
 
 def uploadtoJson():
   with open("userinformation.json", "w") as f:
     json.dump(userinfo, f)
+
+
+startloop()
+uploadtoJson()
+
+
 
 def opt1():
         for x in range(len(books)):
@@ -129,8 +140,8 @@ def opt4():
           uploadtoJson()
           print(" Book Added ")
           return
-        print("Book Not found")
-        return
+      print("Book Not found")
+      return
        
 def opt5():
         userin = input("What book to remove: ")
@@ -198,8 +209,10 @@ while ProgramLoop:
       opt6()
     #Option 7 - End Loop
     elif(userInput == "7"):
-# Upload to JSON
+      ProgramLoop = False
+      startloop()
       break
+    
     
     
   
